@@ -17,14 +17,28 @@ public class NewBehaviourScript : MonoBehaviour
 {
     // Input field gameObject
     [SerializeField] TMP_InputField userNameField;
+    [SerializeField] TMP_Text playerText, levelText, scoreText;
+
+    public void Awake()
+    {
+        LeaderboardUpdate();        
+    }
+
+    // To create the leaderboard
+    public void LeaderboardUpdate()
+    {
+        playerText.text = GameManager.Instance.Leaderboard.GetElement("names");
+        levelText.text = GameManager.Instance.Leaderboard.GetElement("levels");
+        scoreText.text = GameManager.Instance.Leaderboard.GetElement("scores");
+    }
 
     // Main game scene will be load when you click on the play button
     public void PlayButton()
     {
-        /*if (userNameField.text.Length == 0)
+        if (userNameField.text.Length == 0)
         {
-            Persistent_manager.Instance.userName = "Player";
-        }*/
+            GameManager.Instance.userName = "Pilot";
+        }
         SceneManager.LoadScene(1);
     }
 
@@ -42,8 +56,7 @@ public class NewBehaviourScript : MonoBehaviour
     // To get the user name
     public void UserNameInput()
     {
-        /*Persistent_manager.Instance.userName = userNameField.text;
-        Debug.Log("User name: " + Persistent_manager.Instance.userName);*/
-        Debug.Log("User name: " + userNameField.text);
+        GameManager.Instance.userName = userNameField.text;
+        Debug.Log("User name changed to: " + GameManager.Instance.userName);   
     }
 }
