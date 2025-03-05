@@ -5,20 +5,49 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
-    [SerializeField] int moveForce = 25000, rotationSpeed = 5;
+    [SerializeField] bool canShoot=true;
+    [SerializeField] int moveForce = 30000, repulsionForce = 1250000, rotationSpeed = 5;
+    [SerializeField] float shootCD = 1.0f, timeShooted=0.0f;
+    [SerializeField] Vector3 mapCenter;
+    [SerializeField] GameObject Map;
     private Rigidbody2D playerRb;
 
     void Start()
     {
+        // Get the player rigidbody
         playerRb = GetComponent<Rigidbody2D>();
+
+        mapCenter = Map.transform.position;
+
     }
 
     void FixedUpdate()
     {
-        movePlayer();
+        // ABSTRACTION:
+        // Function to move the player
+        MovePlayer();
+
+        // Shooting behaviour
+        if (canShoot && Input.GetMouseButton(0))
+        {
+            // ABSTRACTION:
+            // Function to shoot
+            Shoot();
+
+        }
+        else if (!canShoot)
+        {
+            timeShooted -= Time.deltaTime;
+
+            if (timeShooted <= 0)
+            {
+                canShoot = true;
+            }
+        }
     }
 
-    public void movePlayer()
+    // Function to move the spaceship
+    public void MovePlayer()
     {
         // To get the mouse position
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -32,4 +61,41 @@ public class Player_Controller : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
     }
+
+    public void Shoot()
+    {
+        Debug.Log("Pium!");
+        
+        // Get an object object from the pool
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        if (pooledProjectile != null)
+        {
+            pooledProjectile.SetActive(true); // activate it
+            // position it at player
+            pooledProjectile.transform.position = transform.position; 
+            pooledProjectile.transform.rotation = transform.rotation;
+        }
+
+        canShoot = false;
+        timeShooted = shootCD;
+    }
+
+    // If the player tries to leave the map, the spaceship must be stopped and forced to enter again
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log(collision.transform.name);
+        if(collision.transform.CompareTag("Border"))
+        {
+            Debug.Log("Border reached");
+
+            // First we stop the player
+            playerRb.velocity *= 0.01f; //Vector3.zero;
+
+            // Then we force the player to enter again
+            Vector3 forceDirection = (mapCenter - transform.position).normalized;
+            playerRb.AddForce(forceDirection * repulsionForce * Time.deltaTime);
+
+        }
+    }
+
 }

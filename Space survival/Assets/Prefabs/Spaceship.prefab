@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5481713469797510559}
   - component: {fileID: 5543890647771779941}
   - component: {fileID: 427734018972513573}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spaceship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,5 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9145239d20dee4192f051727fd620a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canShoot: 1
   moveForce: 25000
+  repulsionForce: 1250000
   rotationSpeed: 5
+  shootCD: 1.5
+  timeShooted: 0
+  mapCenter: {x: 0, y: 0, z: 0}
+  Map: {fileID: 0}
