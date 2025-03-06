@@ -357,7 +357,9 @@
 "Assets/Scripts/EnemyClass.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/ObjectPooler.cs"
+"Assets/Scripts/PlanetController.cs"
 "Assets/Scripts/Player_Controller.cs"
+"Assets/Scripts/SpawnerController.cs"
 "Assets/Scripts/Title_buttons_behaviour.cs"
 -langversion:9.0
 

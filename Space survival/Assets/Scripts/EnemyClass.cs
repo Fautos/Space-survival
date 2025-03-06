@@ -4,10 +4,12 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// INHERITANCE:
+// General enemies behaviour
 public class EnemyClass : MonoBehaviour
 {
-    public int speed = 50000;
-    [SerializeField] GameObject Player;
+    public int speed = 50000, dropProbability = 50;
+    [SerializeField] GameObject Player, DropObject;
     private Rigidbody2D enemyRB;
 
     void Awake()
@@ -30,7 +32,23 @@ public class EnemyClass : MonoBehaviour
         if(collision.transform.CompareTag("Bullet"))
         {
             Debug.Log("Enemy killed");
-            gameObject.SetActive(false);
+
+            // If the enemy has any drop assigned it may drop
+            if (DropObject != null)
+            {
+                Drop(Random.Range(0,100));
+            } 
+
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+
+    private void Drop(int Probability)
+    {
+        if (Probability <= dropProbability)
+        {
+            Debug.Log("Somthing dropped");
         }
     }
 }

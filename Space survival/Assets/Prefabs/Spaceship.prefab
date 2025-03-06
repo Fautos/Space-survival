@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 051267b3a2b70b44fabcbb07a5f9c8fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -172,10 +172,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canShoot: 1
-  moveForce: 25000
+  moveForce: 30000
   repulsionForce: 1250000
   rotationSpeed: 5
-  shootCD: 1.5
+  shootCD: 1
   timeShooted: 0
   mapCenter: {x: 0, y: 0, z: 0}
   Map: {fileID: 0}
