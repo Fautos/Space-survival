@@ -19,7 +19,7 @@ public class PlanetController : MonoBehaviour
         {
             if (child != transform)
             {
-                Debug.Log("Hijo encontrado: " + child.name);
+                //Debug.Log("Hijo encontrado: " + child.name);
                 maskTransform = child.transform;
             }
         }
@@ -51,7 +51,7 @@ public class PlanetController : MonoBehaviour
     // If the spaceship leaves before the planet is completed, the timer must be restarted
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (validPlanet != true)
+        if (collision.CompareTag("Player") && validPlanet != true)
         {
             elapsedTime = 0.0f;
             maskTransform.localScale = new Vector3(0, 0, 0);

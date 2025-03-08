@@ -8,7 +8,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] bool canShoot=true;
     [SerializeField] int moveForce = 30000, repulsionForce = 1250000, rotationSpeed = 5;
     [SerializeField] float shootCD = 1.0f, timeShooted=0.0f;
-    [SerializeField] Vector3 mapCenter;
+    [SerializeField] Vector3 mapCenter, forcedDirection;
     [SerializeField] GameObject Map;
     private Rigidbody2D playerRb;
 
@@ -63,15 +63,15 @@ public class Player_Controller : MonoBehaviour
     }
 
     public void Shoot()
-    {
-        Debug.Log("Pium!");
-        
+    {   
         // Get an object object from the pool
-        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject("Bullet");
         if (pooledProjectile != null)
         {
-            pooledProjectile.SetActive(true); // activate it
-            // position it at player
+            // Activate it
+            pooledProjectile.SetActive(true); 
+            
+            // Position it at player
             pooledProjectile.transform.position = transform.position; 
             pooledProjectile.transform.rotation = transform.rotation;
         }
@@ -86,14 +86,14 @@ public class Player_Controller : MonoBehaviour
         Debug.Log(collision.transform.name);
         if(collision.transform.CompareTag("Border"))
         {
-            Debug.Log("Border reached");
+            Debug.Log("Border reached by the player");
 
             // First we stop the player
             playerRb.velocity *= 0.01f; //Vector3.zero;
 
             // Then we force the player to enter again
-            Vector3 forceDirection = (mapCenter - transform.position).normalized;
-            playerRb.AddForce(forceDirection * repulsionForce * Time.deltaTime);
+            forcedDirection = (mapCenter - transform.position).normalized;
+            playerRb.AddForce(forcedDirection * repulsionForce * Time.deltaTime);
 
         }
     }

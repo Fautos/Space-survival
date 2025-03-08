@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3297261594924598921}
   - component: {fileID: 1438753575096309925}
   - component: {fileID: 5639046220436888934}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Planet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 06b0250f4c9a57f45b73bd111e3bb309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 18005800720619554}
   - component: {fileID: 7102344169537521720}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 560880d4d81676e4db118368cda42a61, type: 3}
   m_Color: {r: 0.24866807, g: 0.98490566, b: 0, a: 0.52156866}
   m_FlipX: 0

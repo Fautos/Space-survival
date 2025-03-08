@@ -8,14 +8,26 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
+        transform.Translate(speed * Time.deltaTime * Vector3.up);
     }
 
     // If it gets out of the limits
     void OnTriggerExit2D(Collider2D collision)
     {
-        gameObject.SetActive(false);
+        if (collision.CompareTag("Border"))
+        {
+            gameObject.SetActive(false);
+        }
     }
+
+    // If it hits a shield
+    /*void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Shield"))
+        {
+            gameObject.SetActive(false);
+        }
+    }*/
 
     // If it hits an enemy
     void OnCollisionEnter2D(Collision2D collision)

@@ -10,7 +10,7 @@ public class SpawnerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        InvokeRepeating("spawnEnemy", 0, 1.5f);
+        InvokeRepeating("spawnEnemy", 0, 2.5f);
     }
 
     // Update is called once per frame
