@@ -18,9 +18,9 @@ public class EnemyClass : MonoBehaviour
     {
         Player = GameObject.Find("Spaceship");
         enemyRB = GetComponent<Rigidbody2D>();
-        Map = GameObject.Find("Map_limits");
+        Map = GameObject.Find("Map_center");
         mapCenter = Map.transform.position;
-    }
+    } 
 
     protected virtual void MoveToPayer()
     {
@@ -42,29 +42,39 @@ public class EnemyClass : MonoBehaviour
     {
         if(collision.transform.CompareTag("Bullet"))
         {
-            Debug.Log("Enemy killed"); 
-
             KillEnemy();        
         }
     }
 
     // If the enemy reaches the map limits it will be pushed towards the center but in the player's direction
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.transform.name);
+        //Debug.Log(collision.transform.name);
         if(collision.transform.CompareTag("Border"))
         {
-            Debug.Log("Enemy out of limits");
+            //Debug.Log("Enemy out of limits");
+            BounceFromBorder();
 
-            // First we stop the enemy
-            enemyRB.velocity *= 0.01f; //Vector3.zero;
+        } else if(collision.CompareTag("Bullet") && collision.gameObject.activeSelf)
+        {
+            // The bullet must be destroyed
+            collision.gameObject.SetActive(false);
 
-            // Then we force the enemy to enter again and push it towards the player
-            Vector3 forceDirection = (mapCenter - transform.position).normalized;
-            Vector3 direction = (Player.transform.position - transform.position).normalized;            
-
-            enemyRB.AddForce(speed*100 * Time.deltaTime * (forceDirection + direction).normalized);
+            // And the enemy dies
+            KillEnemy();        
         }
+    }
+
+    protected virtual void BounceFromBorder()
+    {
+        // First we stop the enemy
+        enemyRB.velocity *= 0.01f; //Vector3.zero;
+
+        // Then we force the enemy to enter again and push it towards the player
+        Vector3 forceDirection = (mapCenter - transform.position).normalized;
+        Vector3 direction = (Player.transform.position - transform.position).normalized;            
+
+        enemyRB.AddForce(speed*100 * Time.deltaTime * (forceDirection + direction).normalized);
     }
 
     protected virtual void KillEnemy()

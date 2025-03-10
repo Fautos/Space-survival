@@ -24,10 +24,12 @@ public class Shield : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Bullet") && playerShield == false) || (collision.CompareTag("EnemyBullet") && playerShield == true))
+        Debug.Log(collision.transform.tag);
+        if ((collision.transform.CompareTag("Bullet") && playerShield == false) || (collision.transform.CompareTag("EnemyBullet") && playerShield == true))
         {
             collision.gameObject.SetActive(false);
             gameObject.SetActive(false);
+            Debug.Log("Colisión eliminada");
         }
     }
 }

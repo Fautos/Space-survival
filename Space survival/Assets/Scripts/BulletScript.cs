@@ -1,14 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public int speed = 100;
+    public int speed = 100, maxDistace=50;
+    [SerializeField] GameObject Map;
 
-    void Update()
+    void Awake()
+    {
+        Map = GameObject.Find("Map_center");    
+    }
+
+    void FixedUpdate()
     {
         transform.Translate(speed * Time.deltaTime * Vector3.up);
+        
+        if(Vector3.Distance(Map.transform.position, transform.position) >= maxDistace)
+        {
+            gameObject.SetActive(false);
+        } 
+
     }
 
     // If it gets out of the limits
@@ -20,18 +33,12 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    // If it hits a shield
-    /*void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Shield"))
+        if (collision.CompareTag("Bullet") || collision.CompareTag("EnemyBullet"))
         {
             gameObject.SetActive(false);
         }
-    }*/
-
-    // If it hits an enemy
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        gameObject.SetActive(false);    
     }
+
 }

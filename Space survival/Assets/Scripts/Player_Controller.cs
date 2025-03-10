@@ -80,10 +80,11 @@ public class Player_Controller : MonoBehaviour
         timeShooted = shootCD;
     }
 
-    // If the player tries to leave the map, the spaceship must be stopped and forced to enter again
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.transform.name);
+
+        // If the player tries to leave the map, the spaceship must be stopped and forced to enter again
         if(collision.transform.CompareTag("Border"))
         {
             Debug.Log("Border reached by the player");
@@ -94,8 +95,24 @@ public class Player_Controller : MonoBehaviour
             // Then we force the player to enter again
             forcedDirection = (mapCenter - transform.position).normalized;
             playerRb.AddForce(forcedDirection * repulsionForce * Time.deltaTime);
-
+        } else if(collision.transform.CompareTag("EnemyBullet") && collision.gameObject.activeSelf)
+        {
+            GameOver();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // If an enemy or an enemy's bullet hits the player the game ends
+        if (collision.transform.CompareTag("Enemy")  && collision.gameObject.activeSelf)
+        {
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        gameObject.SetActive(false);
     }
 
 }

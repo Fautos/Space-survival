@@ -170,5 +170,6 @@ MonoBehaviour:
   distance2Player: 0
   minDistance: 20
   canShoot: 0
+  rotationSpeed: 5
   shootCD: 1
-  timeShooted: 0
+  timeShooted: 1

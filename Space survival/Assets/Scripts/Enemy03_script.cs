@@ -6,9 +6,9 @@ public class Enemy03_script : EnemyClass
 {
 
     [SerializeField] protected float distance2Player, minDistance=20;
-    [SerializeField] protected bool canShoot=true;
-    [SerializeField] protected float rotationSpeed= 5, shootCD = 1.0f, timeShooted=0.0f;
-    // Update is called once per frame
+    [SerializeField] protected bool canShoot=false;
+    [SerializeField] protected float rotationSpeed= 5, shootCD = 1.0f, timeShooted = 1.0f;
+
     void FixedUpdate()
     {
         // Move the enemy towards the player
@@ -37,6 +37,18 @@ public class Enemy03_script : EnemyClass
                 canShoot = true;
             }
         }
+    }
+
+    protected override void BounceFromBorder()
+    {
+        // First we stop the enemy
+        enemyRB.velocity *= 0.01f; //Vector3.zero;
+
+        // The enemy 3 should be pushed away from the player
+        Vector3 forceDirection = (mapCenter - transform.position).normalized;
+        Vector3 direction = -1*(Player.transform.position - transform.position).normalized;            
+
+        enemyRB.AddForce(speed*100 * Time.deltaTime * (2*forceDirection + direction).normalized);
     }
 
     protected private void Shoot()
