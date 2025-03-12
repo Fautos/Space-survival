@@ -88,6 +88,12 @@ public class EnemyClass : MonoBehaviour
 
         enemyRB.AddForce(Speed*100 * Time.deltaTime * (forceDirection + direction).normalized);
     }
+
+    protected virtual void StopMovement()
+    {
+        enemyRB.velocity = Vector3.zero; 
+        enemyRB.angularVelocity = 0;
+    }
     #endregion
 
     // If the enemy reaches the map limits it will be pushed towards the center but in the player's direction

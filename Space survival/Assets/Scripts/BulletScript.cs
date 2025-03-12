@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 { 
-    private GameObject Map;
+    private GameObject Map, levelManager;
     private readonly int maxDistace=50; 
 
     // ENCAPSULATION:
@@ -25,18 +25,23 @@ public class BulletScript : MonoBehaviour
 
     void Awake()
     {
-        Map = GameObject.Find("Map_center");    
+        Map = GameObject.Find("Map_center");
+        levelManager = GameObject.Find("Level_Manager");    
     }
 
     void FixedUpdate()
     {
-        // The bullet moves forward except if it reach a distance limit
-        transform.Translate(Speed * Time.deltaTime * Vector3.up);
-        
-        if(Vector3.Distance(Map.transform.position, transform.position) >= maxDistace)
+
+        if (levelManager.GetComponent<LevelManager>().isGameActive)
         {
-            gameObject.SetActive(false);
-        } 
+            // The bullet moves forward except if it reach a distance limit
+            transform.Translate(Speed * Time.deltaTime * Vector3.up);
+            
+            if(Vector3.Distance(Map.transform.position, transform.position) >= maxDistace)
+            {
+                gameObject.SetActive(false);
+            }
+        }
 
     }
 

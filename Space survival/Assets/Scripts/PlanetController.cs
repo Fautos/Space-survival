@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlanetController : MonoBehaviour
 {
     [SerializeField] public Transform maskTransform;
-    [SerializeField] Vector3 initMaskScale;
+    [SerializeField] private Vector3 initMaskScale;
     [SerializeField] private float time2complete = 5.0f, elapsedTime=0.0f, percentage=0.0f;
     [SerializeField] public bool validPlanet = false;
     [SerializeField] private LevelManager LevelManager;
@@ -30,10 +30,15 @@ public class PlanetController : MonoBehaviour
         maskTransform.localScale = new Vector3(0, 0, 0);
     }
 
+    void OnDisable()
+    {
+        ResetPlanet();
+    }
+
     // When the spaceship enters the planet it progress towards its conquest
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Player") && validPlanet == false)
+        if (collision.transform.CompareTag("Player") && validPlanet == false && LevelManager.isGameActive)
         {
             elapsedTime += Time.deltaTime;
             percentage = elapsedTime/time2complete;
@@ -62,12 +67,22 @@ public class PlanetController : MonoBehaviour
     {
         LevelManager.AddPoints(Points);
         validPlanet = true;
+        elapsedTime = 0.0f;
+        percentage = 0.0f;
     }
 
-    public void ResetPlanet()
+    // Function to reset the planet behaviour to the initial state
+    void ResetPlanet()
     {
         validPlanet = false;
-        maskTransform.localScale = new Vector3(0, 0, 0);
         elapsedTime = 0.0f;
+        percentage = 0.0f;
+
+        // Since the planet starts disable, this prevent the initial mask value to be 0
+        if (initMaskScale != Vector3.zero)
+        {
+            maskTransform.localScale = new Vector3(0, 0, 0);
+        }
     }
+
 }

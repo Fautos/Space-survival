@@ -130,9 +130,9 @@ public class GameManager : MonoBehaviour
     private void initScoreBoard()
     {
         // First we add some random characters
-        Leaderboard.AddScore("Fox", 50, 1000);
-        Leaderboard.AddScore("Samus", 25, 500);
-        Leaderboard.AddScore("Pit", 10, 100);
+        Leaderboard.AddScore("Fox", 20, 300);
+        Leaderboard.AddScore("Samus", 10, 125);
+        Leaderboard.AddScore("Pit", 5, 50);
 
         // The rest of the leaderboard will be filled without new pilots
         for (int i=0; i<2; i++)

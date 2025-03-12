@@ -75,7 +75,31 @@ public class SpawnerController : MonoBehaviour
         // If the spawner has less than 5 enemies in play it can still spawn new enemies
         if (transform.childCount < maxEnemysInPlay && LevelManager.isGameActive)
         {
-            Instantiate(Enemys[Random.Range(0, Enemys.Count)], transform);
+            int enemyIndex;
+
+            // The enemy type is selected randomly, but according to the game level
+            if (LevelManager.level == 1 || LevelManager.level == 2)
+            {
+                enemyIndex = 0; 
+            }
+            else if (LevelManager.level == 3)
+            {
+                enemyIndex = 1;
+            }
+            else if (LevelManager.level>3 && LevelManager.level<6)
+            {
+                enemyIndex = Random.Range(0, Enemys.Count-1);
+            }
+            else if (LevelManager.level == 6)
+            {
+                enemyIndex = 2;
+            }
+            else
+            {
+                enemyIndex = Random.Range(0, Enemys.Count);
+            }
+            
+            Instantiate(Enemys[enemyIndex], transform);
         }
     }
 

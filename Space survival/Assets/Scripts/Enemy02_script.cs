@@ -44,6 +44,10 @@ public class Enemy02_script : EnemyClass
                     Shield.SetActive(true);
                 }
             }
+        }
+        else
+        {
+            StopMovement();
         }        
     }
 

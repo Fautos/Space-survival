@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
-    [SerializeField] bool canShoot=true;
+    public bool playerDead = false;
+    [SerializeField] private bool canShoot=true;
     [SerializeField] private int _moveForce = 30000, repulsionForce = 1250000, rotationSpeed = 5;
     [SerializeField] private float _shootCD = 1.0f, timeShooted=0.0f;
     [SerializeField] Vector3 mapCenter, forcedDirection;
     [SerializeField] GameObject Map, Shield;
+    [SerializeField] LevelManager levelManager;
     private Rigidbody2D playerRb;
     private readonly int moveForceLimit = 75000;
     private readonly float shootCDLimit = 0.1f;
@@ -34,6 +36,8 @@ public class Player_Controller : MonoBehaviour
     {
         // Get the player rigidbody
         playerRb = GetComponent<Rigidbody2D>();
+        // And the level manager
+        levelManager = GameObject.Find("Level_Manager").GetComponent<LevelManager>();
 
         mapCenter = Map.transform.position;
 
@@ -41,26 +45,34 @@ public class Player_Controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ABSTRACTION:
-        // Function to move the player
-        MovePlayer();
-
-        // Shooting behaviour
-        if (canShoot && Input.GetMouseButton(0))
+        if(levelManager.isGameActive)
         {
             // ABSTRACTION:
-            // Function to shoot
-            Shoot();
+            // Function to move the player
+            MovePlayer();
 
-        }
-        else if (!canShoot)
-        {
-            timeShooted -= Time.deltaTime;
-
-            if (timeShooted <= 0)
+            // Shooting behaviour
+            if (canShoot && Input.GetMouseButton(0))
             {
-                canShoot = true;
+                // ABSTRACTION:
+                // Function to shoot
+                Shoot();
+
             }
+            else if (!canShoot)
+            {
+                timeShooted -= Time.deltaTime;
+
+                if (timeShooted <= 0)
+                {
+                    canShoot = true;
+                }
+            }
+        }
+        else
+        {
+            playerRb.velocity = Vector3.zero;
+            playerRb.angularVelocity = 0;
         }
     }
 
@@ -146,6 +158,7 @@ public class Player_Controller : MonoBehaviour
     }
     #endregion
 
+    #region PowerUps
     public void IncreaseSpeed(int speed)
     {
         MoveForce += speed;
@@ -155,10 +168,15 @@ public class Player_Controller : MonoBehaviour
     {
         ShootCD -= fireRateCDR;
     }
+    #endregion
 
     public void GameOver()
     {
-        //gameObject.SetActive(false);
+        // When the player dies the game must be stopped
+        playerDead = true;
+        playerRb.velocity = Vector3.zero;
+        playerRb.angularVelocity = 0;
+        levelManager.isGameActive = false;
     }
 
 }

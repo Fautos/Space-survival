@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0fdec865d85284994f1facf1b4c31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maskGO: {fileID: 3544057995571381768}
   maskTransform: {fileID: 18005800720619554}
   initMaskScale: {x: 0, y: 0, z: 0}
   time2complete: 5

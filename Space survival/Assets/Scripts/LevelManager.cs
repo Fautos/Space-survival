@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject player, GameOverScreen, PauseScreen;
     [SerializeField] private TMP_Text playerName, playerLevel, playerScore, messages;
     [SerializeField] private List<GameObject> level_configs, currentPlanets, currentSpawners;
     [SerializeField] public bool isGameActive;
-    [SerializeField] private int gameState=0, level=1;
+    [SerializeField] private int gameState=0;
+    [SerializeField] public int level=1;
 
     // ENCAPSULATION:
     private int _score;
@@ -47,11 +50,21 @@ public class LevelManager : MonoBehaviour
         Score = 0;
         isGameActive = true;
         level = 1;
+
+        // Disable the game over and pause screen
+        if (GameOverScreen.activeInHierarchy)
+        {
+            GameOverScreen.SetActive(false);
+        }
+
+        if (PauseScreen.activeInHierarchy)
+        {
+            PauseScreen.SetActive(false);
+        }
         
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         // If the game is active you can play
         if (isGameActive)
@@ -84,18 +97,47 @@ public class LevelManager : MonoBehaviour
                     break;
                 }
             }
+
+            // If the user press "escape" the game should be paused
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                isGameActive = !isGameActive;
+            }
             
         }
         else
         {
             // If player dies
-            GameOver();
+            if(player.GetComponent<Player_Controller>().playerDead)
+            {
+                // GameOver screen
+                GameOverScreen.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    RestartLevel();
+                }
+                else if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    ReturnToTitle();
+                }
+            }else // If "Pause"
+            {
+                // Pause screen
+                PauseScreen.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    PauseScreen.SetActive(false);
+                    isGameActive = true;
+                }
+                else if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    ReturnToTitle();
+                }
+            }
+            
         } 
         
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            isGameActive = false;
-        }
+        
 
         // Update the level and score
         playerLevel.text = "Level: "+ level;
@@ -203,6 +245,9 @@ public class LevelManager : MonoBehaviour
         DeactiveAllElements(spawners);
 
         // Then we only active the planets we want
+        currentPlanets = new();
+        currentSpawners = new();
+
         // If it's the first configuration
         if (config == 0)
         {
@@ -273,7 +318,13 @@ public class LevelManager : MonoBehaviour
         level ++;
 
         // And reward the player
-        if(level % 2 == 0)
+        if (level % 5 == 0 && level % 2 == 0)
+        {
+            player.GetComponent<Player_Controller>().IncreaseSpeed(10000);
+            player.GetComponent<Player_Controller>().IncreaseFireRate(0.2f);
+            msg += "\nMovement speed and fire rate greatly increased";
+        }
+        else if(level % 2 == 0)
         {
             player.GetComponent<Player_Controller>().IncreaseSpeed(5000);
             msg += "\nMovement speed increased";
@@ -288,15 +339,6 @@ public class LevelManager : MonoBehaviour
         
     }
     #endregion
-
-    private void GameOver()
-    {
-        // Stop game
-
-        // Write user's level and score
-
-        // GameOver screen
-    }
 
     #region Auxiliary functions
     // METHOD OVERLOAD:
@@ -389,6 +431,32 @@ public class LevelManager : MonoBehaviour
         {
             messages.text = "";
         }
+    }
+
+    void ReturnToTitle()
+    {
+        // Write user's level and score
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Leaderboard.AddScore(GameManager.Instance.userName, level, Score);
+        }
+
+        // Then we return to the title screen
+        Debug.Log("Game Exit");
+        SceneManager.LoadScene(0);
+    }
+
+    void RestartLevel()
+    {
+        // Write user's level and score
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Leaderboard.AddScore(GameManager.Instance.userName, level, Score);
+        }
+
+        // Then we restart the screen
+        Debug.Log("Game Exit");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     #endregion

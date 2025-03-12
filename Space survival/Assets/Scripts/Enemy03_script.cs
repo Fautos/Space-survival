@@ -40,6 +40,10 @@ public class Enemy03_script : EnemyClass
                 }
             }
         }
+        else
+        {
+            StopMovement();
+        }
     }
 
     // Polymorphism:

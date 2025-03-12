@@ -13,5 +13,9 @@ public class Enemy01_script : EnemyClass
         {
             MoveToPayer();
         }
+        else
+        {
+            StopMovement();
+        }
     }
 }
