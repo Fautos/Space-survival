@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7714519421044483937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -161,8 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbade465bfaa61439ddf8ba7a49d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50000
-  dropProbability: 50
   Player: {fileID: 0}
   DropObject: {fileID: 0}
   Map: {fileID: 0}

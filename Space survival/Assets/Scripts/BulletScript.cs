@@ -4,9 +4,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
-{
-    public int speed = 100, maxDistace=50;
-    [SerializeField] GameObject Map;
+{ 
+    private GameObject Map;
+    private readonly int maxDistace=50; 
+
+    // ENCAPSULATION:
+    // Bullet speed must be positive
+    private int _speed = 100;
+    public int Speed{get{
+                            return _speed;
+                        } 
+                    set{
+                        if (value < 0)
+                        {
+                            _speed = 0;
+                        }
+                        else{
+                            _speed = value;
+                        }}}
 
     void Awake()
     {
@@ -15,7 +30,8 @@ public class BulletScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(speed * Time.deltaTime * Vector3.up);
+        // The bullet moves forward except if it reach a distance limit
+        transform.Translate(Speed * Time.deltaTime * Vector3.up);
         
         if(Vector3.Distance(Map.transform.position, transform.position) >= maxDistace)
         {
@@ -24,7 +40,7 @@ public class BulletScript : MonoBehaviour
 
     }
 
-    // If it gets out of the limits
+    // If it gets out of the limits it should be deactivated
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Border"))
@@ -33,9 +49,10 @@ public class BulletScript : MonoBehaviour
         }
     }
 
+    // If the bullet hits another bullet both are deactivated
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet") || collision.CompareTag("EnemyBullet"))
+        if ((gameObject.transform.CompareTag("EnemyBullet") && collision.CompareTag("Bullet")) || (gameObject.transform.CompareTag("Bullet") && collision.CompareTag("EnemyBullet")))
         {
             gameObject.SetActive(false);
         }

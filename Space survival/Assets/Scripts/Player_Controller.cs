@@ -1,16 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
     [SerializeField] bool canShoot=true;
-    [SerializeField] int moveForce = 30000, repulsionForce = 1250000, rotationSpeed = 5;
-    [SerializeField] float shootCD = 1.0f, timeShooted=0.0f;
+    [SerializeField] private int _moveForce = 30000, repulsionForce = 1250000, rotationSpeed = 5;
+    [SerializeField] private float _shootCD = 1.0f, timeShooted=0.0f;
     [SerializeField] Vector3 mapCenter, forcedDirection;
-    [SerializeField] GameObject Map;
+    [SerializeField] GameObject Map, Shield;
     private Rigidbody2D playerRb;
+    private readonly int moveForceLimit = 75000;
+    private readonly float shootCDLimit = 0.1f;
+
+    // ENCAPSULATION:
+    // There is a limit for the movement speed and the fire rate
+    public int MoveForce{get{return _moveForce;}
+                        set{
+                            if(value > moveForceLimit)
+                            {_moveForce = moveForceLimit;}
+                            else{_moveForce = value;}
+                        }}
+    public float ShootCD{get{return _shootCD;}
+                        set{
+                            if(value < shootCDLimit)
+                            {_shootCD = shootCDLimit;}
+                            else{_shootCD = value;}
+                        }}
 
     void Start()
     {
@@ -46,6 +64,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    #region Actions
     // Function to move the spaceship
     public void MovePlayer()
     {
@@ -53,7 +72,7 @@ public class Player_Controller : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Move the player
-        playerRb.AddForce(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * moveForce * Time.deltaTime);
+        playerRb.AddForce(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * MoveForce * Time.deltaTime);
 
         // Rotate the player towards the mouse direction
         Vector3 direction = mousePosition - transform.position;
@@ -77,9 +96,11 @@ public class Player_Controller : MonoBehaviour
         }
 
         canShoot = false;
-        timeShooted = shootCD;
+        timeShooted = ShootCD;
     }
+    #endregion
 
+    #region Collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.transform.name);
@@ -95,10 +116,24 @@ public class Player_Controller : MonoBehaviour
             // Then we force the player to enter again
             forcedDirection = (mapCenter - transform.position).normalized;
             playerRb.AddForce(forcedDirection * repulsionForce * Time.deltaTime);
-        } else if(collision.transform.CompareTag("EnemyBullet") && collision.gameObject.activeSelf)
+        } 
+        else if (collision.transform.CompareTag("Power_Up") && collision.gameObject.activeSelf)
+        {
+            // If you pick up a shield power up, the shield should activate
+            if(collision.name.Contains("Shield_PowerUp"))
+            {
+                if(!Shield.gameObject.activeSelf)
+                {
+                    Shield.SetActive(true);
+                    Destroy(collision.gameObject);
+                }
+            }
+        }
+        else if(collision.transform.CompareTag("EnemyBullet") && collision.gameObject.activeSelf)
         {
             GameOver();
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -109,10 +144,21 @@ public class Player_Controller : MonoBehaviour
             GameOver();
         }
     }
+    #endregion
+
+    public void IncreaseSpeed(int speed)
+    {
+        MoveForce += speed;
+    }
+
+    public void IncreaseFireRate(float fireRateCDR)
+    {
+        ShootCD -= fireRateCDR;
+    }
 
     public void GameOver()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
 }

@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class PlanetController : MonoBehaviour
 {
-    [SerializeField] Transform maskTransform;
+    [SerializeField] public Transform maskTransform;
     [SerializeField] Vector3 initMaskScale;
-    [SerializeField] float time2complete = 5.0f, elapsedTime=0.0f, percentage=0.0f;
-    [SerializeField] bool validPlanet = false;
+    [SerializeField] private float time2complete = 5.0f, elapsedTime=0.0f, percentage=0.0f;
+    [SerializeField] public bool validPlanet = false;
+    [SerializeField] private LevelManager LevelManager;
+    private int _points = 5;
+    public int Points{ get {return _points;} 
+                        set { 
+                            if(value<0)
+                            {_points = 0;}
+                            else
+                            {_points = value;} 
+                            }}
 
     // Start is called before the first frame update
     void Start()
     {
-        // Get the "Mask" child where the green mask is stored
-        Transform[] allChildren = transform.GetComponentsInChildren<Transform>();
-
-        foreach (Transform child in allChildren)
-        {
-            if (child != transform)
-            {
-                //Debug.Log("Hijo encontrado: " + child.name);
-                maskTransform = child.transform;
-            }
-        }
+        LevelManager = GameObject.Find("Level_Manager").GetComponent<LevelManager>();
 
         // Save the "completed" values of the mask
         initMaskScale = maskTransform.localScale;
@@ -61,6 +60,14 @@ public class PlanetController : MonoBehaviour
     // Function to set the behaviour of the planet onces it's completed
     void PlanetCompleted()
     {
+        LevelManager.AddPoints(Points);
         validPlanet = true;
+    }
+
+    public void ResetPlanet()
+    {
+        validPlanet = false;
+        maskTransform.localScale = new Vector3(0, 0, 0);
+        elapsedTime = 0.0f;
     }
 }

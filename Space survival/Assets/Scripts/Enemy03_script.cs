@@ -11,34 +11,39 @@ public class Enemy03_script : EnemyClass
 
     void FixedUpdate()
     {
-        // Move the enemy towards the player
-        Vector3 direction = Player.transform.position - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        // If the player is too close to the enemy it scape, otherwise it wont move but it will shoot
-        distance2Player = Vector3.Distance(Player.transform.position, transform.position);
-
-        if (distance2Player < minDistance)
+        if(LevelManager.isGameActive)
         {
-            ScapeFromPlayer();
-        }
-        else if (canShoot)
-        {
-            Shoot();
+            // Move the enemy towards the player
+            Vector3 direction = Player.transform.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        }
-        else if (!canShoot)
-        {
-            timeShooted -= Time.deltaTime;
+            // If the player is too close to the enemy it scape, otherwise it wont move but it will shoot
+            distance2Player = Vector3.Distance(Player.transform.position, transform.position);
 
-            if (timeShooted <= 0)
+            if (distance2Player < minDistance)
             {
-                canShoot = true;
+                ScapeFromPlayer();
+            }
+            else if (canShoot)
+            {
+                Shoot();
+
+            }
+            else if (!canShoot)
+            {
+                timeShooted -= Time.deltaTime;
+
+                if (timeShooted <= 0)
+                {
+                    canShoot = true;
+                }
             }
         }
     }
 
+    // Polymorphism:
+    // Change the Bounce method because this enemy bounce away from the player
     protected override void BounceFromBorder()
     {
         // First we stop the enemy
@@ -48,7 +53,7 @@ public class Enemy03_script : EnemyClass
         Vector3 forceDirection = (mapCenter - transform.position).normalized;
         Vector3 direction = -1*(Player.transform.position - transform.position).normalized;            
 
-        enemyRB.AddForce(speed*100 * Time.deltaTime * (2*forceDirection + direction).normalized);
+        enemyRB.AddForce(Speed*100 * Time.deltaTime * (2*forceDirection + direction).normalized);
     }
 
     protected private void Shoot()

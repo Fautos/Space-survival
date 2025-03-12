@@ -21,29 +21,30 @@ public class Enemy02_script : EnemyClass
 
     void FixedUpdate()
     {
-
-        // First we check the state of the shield
-        CheckShield();
-
-        // If the shield is up the enemy chase the player
-        if (shieldBroken == false)
+        if(LevelManager.isGameActive)
         {
-            MoveToPayer();
-            timelapsed = 0.0f;
-        }
+            // First we check the state of the shield
+            CheckShield();
 
-        // Otherwise it will run away from the player until the shield is restored
-        else
-        {
-            ScapeFromPlayer();
-            timelapsed += Time.deltaTime;
-
-            if (timelapsed >= cdShield)
+            // If the shield is up the enemy chase the player
+            if (shieldBroken == false)
             {
-                Shield.SetActive(true);
+                MoveToPayer();
+                timelapsed = 0.0f;
             }
-        }
-        
+
+            // Otherwise it will run away from the player until the shield is restored
+            else
+            {
+                ScapeFromPlayer();
+                timelapsed += Time.deltaTime;
+
+                if (timelapsed >= cdShield)
+                {
+                    Shield.SetActive(true);
+                }
+            }
+        }        
     }
 
     private void CheckShield()
