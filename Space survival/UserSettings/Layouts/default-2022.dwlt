@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 7}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 778.4
+    x: 777.6
     y: 0
     width: 410.40002
     height: 478.4
@@ -90,9 +90,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1188.8
+    x: 1188
     y: 0
-    width: 347.19995
+    width: 348
     height: 722.8
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
@@ -144,7 +144,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 478.4
-    width: 1188.8
+    width: 1188
     height: 244.4
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
@@ -245,7 +245,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1188.8
+    width: 1188
     height: 722.8
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
@@ -271,7 +271,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1188.8
+    width: 1188
     height: 478.4
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
@@ -294,7 +294,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 193.6
     y: 0
-    width: 584.80005
+    width: 584
     height: 478.4
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -1292,7 +1292,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 552
-    width: 1187.8
+    width: 1187
     height: 223.4
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1315,7 +1315,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Pictures
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1323,16 +1323,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Pictures
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\adrig\Documents\GitHub\Space-survival\Space survival
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f05b0000
-    m_LastClickedID: 23536
-    m_ExpandedIDs: 00000000e45b000000ca9a3b
+    m_SelectedIDs: be1e0000
+    m_LastClickedID: 7870
+    m_ExpandedIDs: 00000000f25c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1360,7 +1360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e45b0000
+    m_ExpandedIDs: 00000000f25c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1436,9 +1436,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1188.8
+    x: 1188
     y: 73.6
-    width: 346.19995
+    width: 347
     height: 701.8
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1502,7 +1502,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 9050ffffee70ffff30fbffff165a0000525a00008e5a0000b05a0000b65a0000d05a0000dc5a0000
+      m_ExpandedIDs: 0217ffff5417ffff6419ffff9a19ffff5866ffffa866ffffbc68fffff668fffff66cffff466dffff566fffff8c6fffffbe85ffff0e86ffff2288ffff5c88ffffb48dffff048effff3090ffff6690ffff1a9bffff6a9bffff7e9dffffb89dffff22a2ffff72a2ffff94a4ffffcaa4ffffd2abffff12afffff64afffff90b1ffffc6b1ffffa8caffff3ed2ffff90d2ffffbcd4fffff2d4ffffbeddffff10deffff3ce0ffff72e0ffffdef6ffff34f9ffffc66a0000ee790000d6850000c096000022980000e8a000003aa20000b8a800000aaa00009cb00000eeb1000094b80000e6b90000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1548,7 +1548,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 193.6
     y: 73.6
-    width: 582.80005
+    width: 582
     height: 457.4
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1837,7 +1837,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 48, y: 48}
+      snapOffset: {x: 48, y: 10.399994}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: UnityEditor.SceneViewCameraOverlay
@@ -1856,9 +1856,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.3832289, y: 2.9269865, z: 3.4017558}
+    m_Target: {x: -8.400047, y: 2.7327528, z: -0.68397033}
     speed: 2
-    m_Value: {x: 1.3832289, y: 2.9269865, z: 3.4017558}
+    m_Value: {x: -8.400047, y: 2.7327528, z: -0.68397033}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1908,9 +1908,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 55.996273
+    m_Target: 63.51614
     speed: 2
-    m_Value: 55.996273
+    m_Value: 63.51614
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1955,7 +1955,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 778.4
+    x: 777.60004
     y: 73.6
     width: 408.40002
     height: 457.4
