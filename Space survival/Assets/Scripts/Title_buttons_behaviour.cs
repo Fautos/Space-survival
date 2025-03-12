@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] TMP_InputField userNameField;
     [SerializeField] TMP_Text playerText, levelText, scoreText;
 
-    public void Awake()
+    public void LateUpdate()
     {
         LeaderboardUpdate();        
     }
@@ -57,6 +57,7 @@ public class NewBehaviourScript : MonoBehaviour
     public void UserNameInput()
     {
         GameManager.Instance.userName = userNameField.text;
+        userNameField.text = GameManager.Instance.userName;
         Debug.Log("User name changed to: " + GameManager.Instance.userName);   
     }
 }

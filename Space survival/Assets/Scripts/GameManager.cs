@@ -6,8 +6,29 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public ScoreData Leaderboard; 
-    public string userName;
+    public ScoreData Leaderboard;
+
+    // ENCAPSULATION:
+    // Before setting the user's name, we check if it is in the banned list
+    private List<string> bannedNames = new List<string>{"Fox", "Samus", "Pit"};
+    private string _userName; 
+    public string userName { 
+                            get
+                            {
+                                return _userName;
+                            }
+                            set
+                            {
+                                if (bannedNames.Contains(value))
+                                {
+                                    Debug.LogWarning("Invalid name, please change it");
+                                    _userName = "Pilot";
+                                }
+                                else
+                                {
+                                    _userName = value;
+                                }
+                            } }
 
     private void Awake()
     {
@@ -108,7 +129,13 @@ public class GameManager : MonoBehaviour
 
     private void initScoreBoard()
     {
-        for (int i=0; i<5; i++)
+        // First we add some random characters
+        Leaderboard.AddScore("Fox", 20, 300);
+        Leaderboard.AddScore("Samus", 10, 125);
+        Leaderboard.AddScore("Pit", 5, 50);
+
+        // The rest of the leaderboard will be filled without new pilots
+        for (int i=0; i<2; i++)
         {
             Leaderboard.AddScore("---", 1, 0);
         }

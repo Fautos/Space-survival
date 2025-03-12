@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Border
+  - Bullet
+  - Enemy
+  - Shield
+  - EnemyBullet
+  - Power_Up
   layers:
   - Default
   - TransparentFX
@@ -11,11 +17,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Spaceship
+  - Bullet
+  - Enemy
+  - Enemy_Bullet
+  - Planet
   - 
   - 
   - 
