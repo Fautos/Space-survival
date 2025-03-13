@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 7}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 129
+  controlID: 53
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -296,8 +296,8 @@ MonoBehaviour:
     y: 0
     width: 584
     height: 478.4
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -1330,9 +1330,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: be1e0000
-    m_LastClickedID: 7870
-    m_ExpandedIDs: 00000000f25c000000ca9a3b
+    m_SelectedIDs: 305c0000
+    m_LastClickedID: 23600
+    m_ExpandedIDs: 00000000265c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1360,7 +1360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f25c0000
+    m_ExpandedIDs: 00000000265c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1502,7 +1502,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0217ffff5417ffff6419ffff9a19ffff5866ffffa866ffffbc68fffff668fffff66cffff466dffff566fffff8c6fffffbe85ffff0e86ffff2288ffff5c88ffffb48dffff048effff3090ffff6690ffff1a9bffff6a9bffff7e9dffffb89dffff22a2ffff72a2ffff94a4ffffcaa4ffffd2abffff12afffff64afffff90b1ffffc6b1ffffa8caffff3ed2ffff90d2ffffbcd4fffff2d4ffffbeddffff10deffff3ce0ffff72e0ffffdef6ffff34f9ffffc66a0000ee790000d6850000c096000022980000e8a000003aa20000b8a800000aaa00009cb00000eeb1000094b80000e6b90000
+      m_ExpandedIDs: c6c1ffff22c2ffff36c4ffff70c4ffff7accffffd6ccffffe6ceffff1ccffffffed6ffff4ed7ffff7ed9ffffb8d9ffff24fbffff3c5a0000fe5a0000da64000012660000926c0000aa6c0000266e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
