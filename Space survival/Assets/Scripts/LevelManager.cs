@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject player, GameOverScreen, PauseScreen;
     [SerializeField] private TMP_Text playerName, playerLevel, playerScore, messages;
     [SerializeField] private List<GameObject> level_configs, currentPlanets, currentSpawners;
+    [SerializeField] private AudioSource BGMusic;
     [SerializeField] public bool isGameActive;
     [SerializeField] private int gameState=0;
     [SerializeField] public int level=1;
@@ -35,10 +36,11 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Hijo encontrado: " + child.name);
         }
 
-        // Get the user's name
+        // Get the user's name and the musci settings
         if (GameManager.Instance != null)
         {
             playerName.text = "Player: " + GameManager.Instance.userName;
+            BGMusic.mute = !GameManager.Instance.musicOn;
         }
         else
         {
@@ -112,6 +114,13 @@ public class LevelManager : MonoBehaviour
             {
                 // GameOver screen
                 GameOverScreen.SetActive(true);
+
+                // Turn off the music
+                if(BGMusic.mute == false)
+                {
+                    BGMusic.mute = true;
+                }
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     RestartLevel();

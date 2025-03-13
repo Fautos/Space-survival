@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+//using UnityEngine.UIElements;
+
 
 
 // For EditorApplication (only used in edition mode)
@@ -18,7 +20,8 @@ public class NewBehaviourScript : MonoBehaviour
     // Input field gameObject
     [SerializeField] TMP_InputField userNameField;
     [SerializeField] TMP_Text playerText, levelText, scoreText;
-    public GameObject loadingScreen;
+    [SerializeField] Toggle musicToggle;
+    public GameObject loadingScreen, OptionsScreen;
 
     public void Start()
     {
@@ -50,6 +53,25 @@ public class NewBehaviourScript : MonoBehaviour
         }
         //SceneManager.LoadScene(1);
         LoadScene(1);
+    }
+
+    public void SettingsButton()
+    {
+        if(OptionsScreen.activeInHierarchy)
+        {
+            musicToggle.isOn = GameManager.Instance.musicOn;
+            OptionsScreen.SetActive(false);
+        }
+        else
+        {
+            OptionsScreen.SetActive(true);
+            musicToggle.isOn = GameManager.Instance.musicOn;
+        }
+    }
+
+    public void MusicOnOff()
+    { 
+        GameManager.Instance.musicOn = !GameManager.Instance.musicOn;
     }
 
     // You will exit the game when you press the exit button

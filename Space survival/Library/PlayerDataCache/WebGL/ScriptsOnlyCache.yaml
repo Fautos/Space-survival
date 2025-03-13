@@ -41,6 +41,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.RectMask2D
+    - UnityEngine.UI.Toggle
   serializedClasses:
     Assembly-CSharp:
     - GameManager/ScoreData
@@ -80,6 +81,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
     - UnityEngine.UI.SpriteState
+    - UnityEngine.UI.Toggle/ToggleEvent
   methodsToPreserve:
   - assembly: Assembly-CSharp
     fullTypeName: NewBehaviourScript
@@ -89,7 +91,16 @@ ScriptsOnlyBuild:
     methodName: UserNameInput
   - assembly: Assembly-CSharp
     fullTypeName: NewBehaviourScript
+    methodName: SettingsButton
+  - assembly: Assembly-CSharp
+    fullTypeName: NewBehaviourScript
+    methodName: SettingsButton
+  - assembly: Assembly-CSharp
+    fullTypeName: NewBehaviourScript
     methodName: ExitButton
+  - assembly: Assembly-CSharp
+    fullTypeName: NewBehaviourScript
+    methodName: MusicOnOff
   sceneClasses:
     Assets/Scenes/Game.unity:
     - Class: 1
@@ -123,6 +134,10 @@ ScriptsOnlyBuild:
     - Class: 70
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
@@ -229,6 +244,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4524}
     - Class: 114
       Script: {instanceID: 4846}
+    - Class: 114
+      Script: {instanceID: 4906}
     - Class: 114
       Script: {instanceID: 5028}
     - Class: 114
@@ -366,7 +383,7 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
-      Hash: 113fec7eb9dbbe5da0d8843d0fcd1d13
+      Hash: 8e93efc7a35a33c545d9aa29c27132d9
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Player_Controller
@@ -678,7 +695,7 @@ ScriptsOnlyBuild:
     className: UnityOnPointerClickMessageListener
   - hash:
       serializedVersion: 2
-      Hash: ae61905944e412b4af85efd6bafb1676
+      Hash: e004fdafdc6c8dcca5ae8c4dc58011cb
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: NewBehaviourScript
@@ -792,7 +809,7 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
-      Hash: 67367fa99fd16cbeb406a073e4ebd197
+      Hash: 523657a14030dd444a84d0791eebf705
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Enemy03_script
@@ -870,7 +887,7 @@ ScriptsOnlyBuild:
     className: UnityOnMouseUpAsButtonMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 8620a609738a4ef67a4624e9b5026ebf
+      Hash: 9a8004d2ebe3d3c880e150335b2db10b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: GameManager
@@ -1146,7 +1163,7 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: e83ebdc3a951bf00190c962ce8cba7e1
+      Hash: 4505c3e0aa0955ccd1022f38f8f61f30
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: LevelManager

@@ -7,7 +7,8 @@ public class Enemy03_script : EnemyClass
 
     [SerializeField] protected float distance2Player, minDistance=20;
     [SerializeField] protected bool canShoot=false;
-    [SerializeField] protected float rotationSpeed= 5, shootCD = 1.0f, timeShooted = 1.0f;
+    [SerializeField] protected float rotationSpeed= 5, shootCD = 2.0f, timeShooted = 1.0f;
+    [SerializeField] protected int shootSpeed = 75;
 
     void FixedUpdate()
     {
@@ -70,6 +71,8 @@ public class Enemy03_script : EnemyClass
             // position it at player
             pooledProjectile.transform.position = transform.position; 
             pooledProjectile.transform.rotation = transform.rotation;
+            //Decrease the proyectile speed
+            pooledProjectile.GetComponent<BulletScript>().Speed = shootSpeed;
         }
 
         canShoot = false;

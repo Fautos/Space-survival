@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public ScoreData Leaderboard;
+    public bool musicOn = true;
 
     // ENCAPSULATION:
     // Before setting the user's name, we check if it is in the banned list

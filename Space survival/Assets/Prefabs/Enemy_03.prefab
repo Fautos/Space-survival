@@ -164,10 +164,12 @@ MonoBehaviour:
   Player: {fileID: 0}
   DropObject: {fileID: 0}
   Map: {fileID: 0}
+  LevelManager: {fileID: 0}
   mapCenter: {x: 0, y: 0, z: 0}
   distance2Player: 0
   minDistance: 20
   canShoot: 0
   rotationSpeed: 5
-  shootCD: 1
+  shootCD: 2
   timeShooted: 1
+  shootSpeed: 75

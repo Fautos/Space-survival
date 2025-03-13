@@ -34,6 +34,8 @@ UnityEngine.Application::Quit
 UnityEngine.Application::get_platform
 UnityEngine.AsyncOperation::get_isDone
 UnityEngine.AsyncOperation::InternalDestroy
+UnityEngine.AudioSource::get_mute
+UnityEngine.AudioSource::set_mute
 UnityEngine.Behaviour::get_enabled
 UnityEngine.Behaviour::get_isActiveAndEnabled
 UnityEngine.Behaviour::set_enabled

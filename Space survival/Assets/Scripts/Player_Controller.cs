@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     public bool playerDead = false;
-    [SerializeField] private bool canShoot=true;
+    [SerializeField] private bool canShoot=true, canDie=true;
     [SerializeField] private int _moveForce = 30000, repulsionForce = 1250000, rotationSpeed = 5;
     [SerializeField] private float _shootCD = 1.0f, timeShooted=0.0f;
     [SerializeField] Vector3 mapCenter, forcedDirection;
@@ -172,11 +172,14 @@ public class Player_Controller : MonoBehaviour
 
     public void GameOver()
     {
-        // When the player dies the game must be stopped
-        playerDead = true;
-        playerRb.velocity = Vector3.zero;
-        playerRb.angularVelocity = 0;
-        levelManager.isGameActive = false;
+        if (canDie)
+        {
+            // When the player dies the game must be stopped
+            playerDead = true;
+            playerRb.velocity = Vector3.zero;
+            playerRb.angularVelocity = 0;
+            levelManager.isGameActive = false;
+        }
     }
 
 }
